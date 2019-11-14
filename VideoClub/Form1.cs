@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.VisualBasic;
+using System;
+using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Windows.Forms;
 
@@ -115,7 +117,43 @@ namespace VideoClub
 
         private void buscarToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            string nombre = I;
+
+            string nombre = Interaction.InputBox("Ingrese Nombre de la película:", Title: "Busqueda", "Nombre", 100, 0);
+
+            listBox1.FindString(nombre);
+
+            SqlConnection conexion = new SqlConnection(connect());
+            conexion.Open();
+
+            string cadena = "SELECT * FROM tabla_peliculas WHERE nombre = '" + listBox1.GetItemText(nombre) + "'";
+            SqlCommand comando = new SqlCommand(cadena, conexion);
+            SqlDataReader registro = comando.ExecuteReader();
+            int num = int.Parse(listBox1.GetItemText(listBox1.FindString(nombre)));
+            
+            if (num > 0)
+            {
+                registro.Read();
+
+                id.Text = registro["id"].ToString().Trim();
+                titulo.Text = registro["nombre"].ToString().Trim();
+                director.Text = registro["director"].ToString().Trim();
+                estreno.Text = registro["estreno"].ToString().Trim();
+                genero.Text = registro["genero"].ToString().Trim();
+                sinopsis.Text = registro["sinopsis"].ToString().Trim();
+                cant.Text = registro["cantidad"].ToString().Trim();
+                precio.Text = registro["precio"].ToString().Trim();
+            }
+            else
+            {
+                MessageBox.Show("El nombre: " + nombre + " no coincide con ninguna película");
+            }
+
+            
+            conexion.Close();
+
+           
+            
+            
         }
     }
 }
