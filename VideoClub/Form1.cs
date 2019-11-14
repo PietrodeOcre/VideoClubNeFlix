@@ -1,6 +1,5 @@
 ﻿using Microsoft.VisualBasic;
 using System;
-using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Windows.Forms;
 
@@ -34,7 +33,6 @@ namespace VideoClub
         {
             Form2 form = new Form2();
             form.Show(this);
-            form.Close();
             this.Hide();
         }
 
@@ -79,7 +77,7 @@ namespace VideoClub
             string cadena = "SELECT * FROM tabla_peliculas WHERE nombre = '" + listBox1.SelectedItem + "'";
             SqlCommand comando = new SqlCommand(cadena, conexion);
             SqlDataReader registro = comando.ExecuteReader();
-            
+
             registro.Read();
             id.Text = registro["id"].ToString().Trim();
             titulo.Text = registro["nombre"].ToString().Trim();
@@ -94,30 +92,59 @@ namespace VideoClub
 
         private void alquilarToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            int canti = int.Parse(cant.Text.ToString());
-            canti = canti - 1;
-            SqlConnection conexion = new SqlConnection(connect());
-            conexion.Open();
-            string cadena = null;
-            cadena = "UPDATE  [Ejercicio3].[dbo].[tabla_peliculas] SET cantidad=" + canti.ToString() + " where nombre='" + listBox1.SelectedItem + "'";
-            SqlCommand comando = new SqlCommand(cadena, conexion);
-            comando.ExecuteNonQuery();
-            MessageBox.Show("Se ha realizado un alquiler: " + listBox1.SelectedItem);
-            conexion.Close();
+            int canti = 0;
+            try
+            {
+                canti = int.Parse(cant.Text.ToString());
+            }
+            catch (Exception)
+            {
+                canti = 0;
+                
+            }
 
-            conexion.Open();
-            cadena = null;
-            cadena = "SELECT cantidad FROM tabla_peliculas WHERE nombre = '" + listBox1.SelectedItem + "'";
-            comando = new SqlCommand(cadena, conexion);
-            SqlDataReader registro = comando.ExecuteReader();
-            registro.Read();
-            cant.Text = registro["cantidad"].ToString().Trim();
-            conexion.Close();
+            canti = canti - 1;
+
+            if (canti == -1)
+            {
+                MessageBox.Show("Debes seleccionar una película.");
+            }
+            else if (canti > 0)
+            {
+                if (user == true)
+                {
+                    SqlConnection conexion = new SqlConnection(connect());
+                    conexion.Open();
+                    string cadena = null;
+                    cadena = "UPDATE  [Ejercicio3].[dbo].[tabla_peliculas] SET cantidad=" + canti.ToString() + " where nombre='" + listBox1.SelectedItem + "'";
+                    SqlCommand comando = new SqlCommand(cadena, conexion);
+                    comando.ExecuteNonQuery();
+                    MessageBox.Show("Se ha realizado un alquiler: " + listBox1.SelectedItem);
+                    conexion.Close();
+
+                    conexion.Open();
+                    cadena = null;
+                    cadena = "SELECT cantidad FROM tabla_peliculas WHERE nombre = '" + listBox1.SelectedItem + "'";
+                    comando = new SqlCommand(cadena, conexion);
+                    SqlDataReader registro = comando.ExecuteReader();
+                    registro.Read();
+                    cant.Text = registro["cantidad"].ToString().Trim();
+                    conexion.Close();
+                }
+                else
+                {
+                    MessageBox.Show("Debes estar logueado para poder acceder a esta funcionalidad");
+                }
+            }
+            else
+            {
+                MessageBox.Show("No quedan copias disponibles de la pelicula " + listBox1.SelectedItem);
+            }
+
         }
 
         private void buscarToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
             string nombre = Interaction.InputBox("Ingrese Nombre de la película:", Title: "Busqueda", "Nombre", 100, 0);
 
             listBox1.FindString(nombre);
@@ -129,7 +156,7 @@ namespace VideoClub
             SqlCommand comando = new SqlCommand(cadena, conexion);
             SqlDataReader registro = comando.ExecuteReader();
             int num = int.Parse(listBox1.GetItemText(listBox1.FindString(nombre)));
-            
+
             if (num > 0)
             {
                 registro.Read();
@@ -147,13 +174,7 @@ namespace VideoClub
             {
                 MessageBox.Show("El nombre: " + nombre + " no coincide con ninguna película");
             }
-
-            
             conexion.Close();
-
-           
-            
-            
         }
     }
 }

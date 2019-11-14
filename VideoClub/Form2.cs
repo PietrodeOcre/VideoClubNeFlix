@@ -22,7 +22,7 @@ namespace VideoClub
 
         private void button1_Click(object sender, EventArgs e)
         {
-            System.Data.SqlClient.SqlConnection conexion = connect();
+            SqlConnection conexion = connect();
             conexion.Open();
             string nombre = usuario.Text;
             string cadena = "SELECT usuario, passw FROM tabla_usuarios WHERE usuario='" + nombre + "'";
@@ -85,5 +85,7 @@ namespace VideoClub
 
 
         }
+
+
     }
 }
