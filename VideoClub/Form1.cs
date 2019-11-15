@@ -233,7 +233,7 @@ namespace VideoClub
             {
                 MessageBox.Show("Debes seleccionar una película.");
             }
-            else if (canti >= 0 || canti <= 5)//Este if puede usarse para comparar con la cantidad maxima que puede haber
+            else if (canti >= 0 && canti <= 5)//Este if puede usarse para comparar con la cantidad maxima que puede haber
             {
                 if (user == true)
                 {
