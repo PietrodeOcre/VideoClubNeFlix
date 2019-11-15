@@ -118,6 +118,7 @@
             this.devolverToolStripMenuItem.Name = "devolverToolStripMenuItem";
             this.devolverToolStripMenuItem.Size = new System.Drawing.Size(129, 39);
             this.devolverToolStripMenuItem.Text = "Devolver";
+            this.devolverToolStripMenuItem.Click += new System.EventHandler(this.devolverToolStripMenuItem_Click);
             // 
             // buscarToolStripMenuItem
             // 

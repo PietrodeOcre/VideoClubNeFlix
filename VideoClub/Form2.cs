@@ -15,11 +15,21 @@ namespace VideoClub
         {
             Form1.user = us;
         }
+
+        /*
+         * Metodo que devuelve el string de la conexion.
+         */
         private static SqlConnection connect()
         {
             return new SqlConnection("server=PIETRODEOCRE-PC\\SQLEXPRESS ; database=Ejercicio3 ; integrated security = true");
         }
 
+        /*
+         * Funcionalidad del Aceptar de validar el usuario y la contraseña
+         * en caso de no existir devuelve un mensaje de error y si se coloca 
+         * un nombre o password incorrecta tambien muestra error. tambien actualia la 
+         * variable del form1 que indica si estamos conectados o desconectados.
+         */
         private void button1_Click(object sender, EventArgs e)
         {
             SqlConnection conexion = connect();
@@ -77,6 +87,9 @@ namespace VideoClub
             }
         }
 
+        /*
+         * Funcionalidad del Cancelar de cerrar el form2 y volver al form1.
+         */
         private void button2_Click(object sender, EventArgs e)
         {
 
