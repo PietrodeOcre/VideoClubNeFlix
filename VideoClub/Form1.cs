@@ -299,12 +299,8 @@ namespace VideoClub
             else
             {
                 /*
-                 * Aqui pondremos el mensaje que el sistema da si llegamos al numero maximo
-                 * de copias que teniamos en un principio, otra opcion es que pontamos un tope fijo 
-                 * para cada pelicula, es decir, que siempre tengamos maximo 5 copias de cada pelicula
-                 * con lo cual el tope maximo siempre sera de 5 es una opcion para no crear otra tabla
-                 * 
-                 * YA se ha incorporado esta opción, solo queda poner el interface bonito
+                 * Aqui pondremos el mensaje que el sistema da, si llegamos al numero maximo 5 copias
+                 * de cada pelicula 
                  */
                 MessageBox.Show("Número de copias del producto es 5 esa pelicula no pertenece a este videoclub");
             }
