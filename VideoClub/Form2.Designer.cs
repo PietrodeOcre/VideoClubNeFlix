@@ -39,41 +39,53 @@
             // 
             // usuario
             // 
-            this.usuario.Location = new System.Drawing.Point(139, 40);
+            this.usuario.Location = new System.Drawing.Point(210, 57);
+            this.usuario.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
             this.usuario.Name = "usuario";
-            this.usuario.Size = new System.Drawing.Size(100, 20);
+            this.usuario.Size = new System.Drawing.Size(164, 34);
             this.usuario.TabIndex = 0;
             // 
             // passw
             // 
-            this.passw.Location = new System.Drawing.Point(139, 88);
+            this.passw.Location = new System.Drawing.Point(210, 102);
+            this.passw.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
             this.passw.Name = "passw";
-            this.passw.Size = new System.Drawing.Size(100, 20);
+            this.passw.PasswordChar = '*';
+            this.passw.Size = new System.Drawing.Size(164, 34);
             this.passw.TabIndex = 1;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(74, 43);
+            this.label1.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 13.8F);
+            this.label1.ForeColor = System.Drawing.Color.White;
+            this.label1.Location = new System.Drawing.Point(44, 61);
+            this.label1.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(43, 13);
+            this.label1.Size = new System.Drawing.Size(86, 30);
             this.label1.TabIndex = 2;
-            this.label1.Text = "Usuario";
+            this.label1.Text = "Usuario:";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(74, 91);
+            this.label2.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 13.8F);
+            this.label2.ForeColor = System.Drawing.Color.White;
+            this.label2.Location = new System.Drawing.Point(44, 105);
+            this.label2.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(61, 13);
+            this.label2.Size = new System.Drawing.Size(115, 30);
             this.label2.TabIndex = 3;
             this.label2.Text = "Contraseña";
+            this.label2.Click += new System.EventHandler(this.Label2_Click);
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(77, 160);
+            this.button1.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.Location = new System.Drawing.Point(69, 152);
+            this.button1.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.Size = new System.Drawing.Size(125, 51);
             this.button1.TabIndex = 4;
             this.button1.Text = "Aceptar";
             this.button1.UseVisualStyleBackColor = true;
@@ -81,9 +93,11 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(163, 159);
+            this.button2.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 12F);
+            this.button2.Location = new System.Drawing.Point(231, 152);
+            this.button2.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.Size = new System.Drawing.Size(125, 51);
             this.button2.TabIndex = 5;
             this.button2.Text = "Cancelar";
             this.button2.UseVisualStyleBackColor = true;
@@ -91,19 +105,23 @@
             // 
             // Form2
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 29F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(362, 233);
+            this.BackColor = System.Drawing.Color.Black;
+            this.BackgroundImage = global::VideoClub.Properties.Resources.Base_VC_Logo;
+            this.ClientSize = new System.Drawing.Size(418, 234);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.passw);
             this.Controls.Add(this.usuario);
+            this.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 13.8F);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
             this.Name = "Form2";
-            this.Text = "Conexión";
-            
+            this.Text = "Inicio de sesión";
             this.ResumeLayout(false);
             this.PerformLayout();
 

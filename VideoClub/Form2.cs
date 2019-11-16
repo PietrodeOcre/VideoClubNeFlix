@@ -21,7 +21,7 @@ namespace VideoClub
          */
         private static SqlConnection connect()
         {
-            return new SqlConnection("server=PIETRODEOCRE-PC\\SQLEXPRESS ; database=Ejercicio3 ; integrated security = true");
+            return new SqlConnection("server=localhost\\SQLEXPRESS ; database=Ejercicio3 ; integrated security = true");
         }
 
         /*
@@ -99,6 +99,9 @@ namespace VideoClub
 
         }
 
+        private void Label2_Click(object sender, EventArgs e)
+        {
 
+        }
     }
 }

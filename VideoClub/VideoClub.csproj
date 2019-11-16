@@ -76,6 +76,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -89,6 +90,24 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Base.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Base_VC.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Base_VC Logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Base_VC Logo_V2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Base_VC Sin_Logo_V2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Base_VC Logo_V3.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
