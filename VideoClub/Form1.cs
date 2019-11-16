@@ -27,7 +27,7 @@ namespace VideoClub
          */
         private string connect()
         {
-            return "server=LENOVOY530\\SQLEXPRESS ; database=Ejercicio3 ; integrated security = true";
+            return "server=localhost\\SQLEXPRESS ; database=Ejercicio3 ; integrated security = true";
         }
 
         /*
