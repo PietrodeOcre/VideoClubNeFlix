@@ -1,6 +1,9 @@
 ﻿using Microsoft.VisualBasic;
 using System;
+using System.Data;
 using System.Data.SqlClient;
+using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
 
 namespace VideoClub
@@ -24,7 +27,7 @@ namespace VideoClub
          */
         private string connect()
         {
-            return "server=PIETRODEOCRE-PC\\SQLEXPRESS ; database=Ejercicio3 ; integrated security = true";
+            return "server=LENOVOY530\\SQLEXPRESS ; database=Ejercicio3 ; integrated security = true";
         }
 
         /*
@@ -109,6 +112,21 @@ namespace VideoClub
             cant.Text = registro["cantidad"].ToString().Trim();
             precio.Text = registro["precio"].ToString().Trim();
             conexion.Close();
+            //Se crea una conexión nueva para hacer la búsqueda de la portada, en base al campo Id de la peli
+            SqlConnection conexion2 = new SqlConnection(connect());
+            conexion2.Open();
+            SqlDataAdapter dataAdapter = new SqlDataAdapter(new SqlCommand("SELECT [file] FROM galeria WHERE id = " + id.Text, conexion2));
+            DataSet dataSet = new DataSet();
+            dataAdapter.Fill(dataSet,"[file]");
+            //Si hay resultado en la consulta, mostramos el fichero en el PictureBox
+            if (dataSet.Tables[0].Rows.Count == 1)
+            {
+                Byte[] data = new Byte[0];
+                data = (Byte[])(dataSet.Tables[0].Rows[0]["file"]);
+                MemoryStream mem = new MemoryStream(data);
+                portada.Image = Image.FromStream(mem);
+            }
+            conexion2.Close();
         }
 
         /*
@@ -145,7 +163,7 @@ namespace VideoClub
                     cadena = "UPDATE  [Ejercicio3].[dbo].[tabla_peliculas] SET cantidad=" + canti.ToString() + " where nombre='" + listBox1.SelectedItem + "'";
                     SqlCommand comando = new SqlCommand(cadena, conexion);
                     comando.ExecuteNonQuery();
-                    MessageBox.Show("Se ha realizado un alquiler: " + listBox1.SelectedItem);
+                    MessageBox.Show("Has alquilado la película: " + listBox1.SelectedItem);
                     conexion.Close();
 
                     conexion.Open();
@@ -177,32 +195,50 @@ namespace VideoClub
          */
         private void buscarToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            string nombre = Interaction.InputBox("Ingrese Nombre de la película:", Title: "Busqueda", "Nombre", 100, 0);
-
-            //listBox1.FindString(nombre);
+            string nombre = Interaction.InputBox("Introduce el nombre de la película", Title: "Buscador", "Nombre", 100, 0);
 
             SqlConnection conexion = new SqlConnection(connect());
             conexion.Open();
 
-            string cadena = "SELECT * FROM tabla_peliculas WHERE nombre = '" + listBox1.GetItemText(nombre) + "'";
-            SqlCommand comando = new SqlCommand(cadena, conexion);
-            SqlDataReader registro = comando.ExecuteReader();
-            int num = int.Parse(listBox1.GetItemText(listBox1.FindString(nombre)));
-            if (num > 0)
+            //string cadena = "SELECT * FROM tabla_peliculas WHERE nombre like '%" + listBox1.GetItemText(nombre) + "%'";
+            // SqlCommand comando = new SqlCommand(cadena, conexion);
+            //SqlDataReader registro = comando.ExecuteReader();
+            string cmd = "SELECT id,nombre,director,estreno,genero,sinopsis,cantidad,precio FROM tabla_peliculas WHERE nombre like '%" + listBox1.GetItemText(nombre) + "%'";
+            SqlDataAdapter dataAdapter = new SqlDataAdapter(cmd,conexion);
+            DataSet dataSet = new DataSet();
+            dataAdapter.Fill(dataSet, "id");
+            //Si hay resultado en la consulta, mostramos el fichero en el PictureBox
+            if (dataSet.Tables[0].Rows.Count == 1)
+            //int num = int.Parse(listBox1.GetItemText(listBox1.FindString(nombre)));
+            //if (num > 0)
             {
-                registro.Read();
-                id.Text = registro["id"].ToString().Trim();
-                titulo.Text = registro["nombre"].ToString().Trim();
-                director.Text = registro["director"].ToString().Trim();
-                estreno.Text = registro["estreno"].ToString().Trim();
-                genero.Text = registro["genero"].ToString().Trim();
-                sinopsis.Text = registro["sinopsis"].ToString().Trim();
-                cant.Text = registro["cantidad"].ToString().Trim();
-                precio.Text = registro["precio"].ToString().Trim();
+                
+                id.Text = dataSet.Tables[0].Rows[0][0].ToString();
+                titulo.Text = dataSet.Tables[0].Rows[0][1].ToString();
+                director.Text = dataSet.Tables[0].Rows[0][2].ToString();
+                estreno.Text = dataSet.Tables[0].Rows[0][3].ToString();
+                genero.Text = dataSet.Tables[0].Rows[0][4].ToString();
+                sinopsis.Text = dataSet.Tables[0].Rows[0][5].ToString();
+                cant.Text = dataSet.Tables[0].Rows[0][6].ToString();
+                precio.Text = dataSet.Tables[0].Rows[0][7].ToString();
+
+                SqlConnection conexion2 = new SqlConnection(connect());
+                conexion2.Open();
+                SqlDataAdapter dataAdapter2 = new SqlDataAdapter(new SqlCommand("SELECT [file] FROM galeria WHERE id = " + id.Text, conexion2));
+                DataSet dataSet2 = new DataSet();
+                dataAdapter2.Fill(dataSet2, "[file]");
+                //Si hay resultado en la consulta, mostramos el fichero en el PictureBox
+                    if (dataSet2.Tables[0].Rows.Count == 1)
+                        {
+                         Byte[] data2 = new Byte[0];
+                         data2 = (Byte[])(dataSet2.Tables[0].Rows[0]["file"]);
+                         MemoryStream mem = new MemoryStream(data2);
+                         portada.Image = Image.FromStream(mem);
+                        }
             }
             else
             {
-                MessageBox.Show("El nombre: " + nombre + " no coincide con ninguna película");
+                MessageBox.Show("Ups. No se han encontrado resultados para: " + nombre);
             }
             listBox1.SelectedItem = nombre;
             conexion.Close();
@@ -272,6 +308,16 @@ namespace VideoClub
                  */
                 MessageBox.Show("Número de copias del producto es 5 esa pelicula no pertenece a este videoclub");
             }
+
+        }
+
+        private void Label7_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Label8_Click(object sender, EventArgs e)
+        {
 
         }
     }
