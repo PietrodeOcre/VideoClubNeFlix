@@ -319,9 +319,18 @@ namespace VideoClub
 
         private void ToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            Form3 form = new Form3();
-            form.Show(this);
-            this.Hide();
+
+            if (user == true)
+            {
+                Form3 form = new Form3();
+                form.Show(this);
+                this.Hide();
+            }
+            else
+            {
+                MessageBox.Show("Debes estar logueado para poder acceder a esta funcionalidad");
+            }
+            
         }
     }
 }
