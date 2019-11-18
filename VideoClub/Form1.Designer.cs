@@ -58,6 +58,7 @@
             this.id = new System.Windows.Forms.TextBox();
             this.sinopsis = new System.Windows.Forms.TextBox();
             this.portada = new System.Windows.Forms.PictureBox();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.portada)).BeginInit();
             this.SuspendLayout();
@@ -72,7 +73,8 @@
             this.loginToolStripMenuItem,
             this.buscarToolStripMenuItem,
             this.alquilarToolStripMenuItem,
-            this.devolverToolStripMenuItem});
+            this.devolverToolStripMenuItem,
+            this.toolStripMenuItem1});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(8, 6, 0, 6);
@@ -398,6 +400,15 @@
             this.portada.TabIndex = 22;
             this.portada.TabStop = false;
             // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 13.8F);
+            this.toolStripMenuItem1.ForeColor = System.Drawing.Color.White;
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(145, 34);
+            this.toolStripMenuItem1.Text = "Alta Peliculas";
+            this.toolStripMenuItem1.Click += new System.EventHandler(this.ToolStripMenuItem1_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -476,6 +487,7 @@
         private System.Windows.Forms.TextBox id;
         private System.Windows.Forms.TextBox sinopsis;
         private System.Windows.Forms.PictureBox portada;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
     }
 }
 
